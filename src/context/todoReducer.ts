@@ -1,27 +1,26 @@
-import { Todo, TodoState } from "../interfaces/interfaces";
+import { Todo } from "../interfaces/interfaces";
 
 
 type TodoAction =
-  | { type: 'addTodo', payload: Todo }
-  | { type: 'toggleTodo', payload: { id: string } }
+  | {type: 'addTodo', payload: Todo}
+  | {type: 'removeTodo', payload: { index: number }}
+  | {type: 'toggleTodo', payload: { id: string }}
 
-export const todoReducer = (state: TodoState, action: TodoAction):TodoState => {
+export const todoReducer = (state: Todo[], action: TodoAction):Todo[] => {
   switch (action.type) {
     case 'addTodo':
-      return {
-        ...state,
-        todos: [...state.todos, action.payload]
-      }
+      return [...state, action.payload];
+    case 'removeTodo':
+      const todos = [...state];
+      todos.splice(action.payload.index, 1);
+      return todos
     case 'toggleTodo':
-      return {
-        ...state,
-        todos: state.todos.map(({...todo}) => {
-          if (todo.id === action.payload.id) {
-            todo.completed = !todo.completed;
-          }
-          return todo;
-        }),
-      }
+      return state.map(({...todo}) => {
+        if (todo.id === action.payload.id) {
+          todo.completed = !todo.completed;
+        }
+        return todo;
+      });
     default:
       return state;
   }

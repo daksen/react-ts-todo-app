@@ -1,8 +1,10 @@
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import { todoReducer } from "./todoReducer";
 import { TodoContext } from "./TodoContext"
-import { TodoState } from "../interfaces/interfaces";
+import { Todo } from "../interfaces/interfaces";
 
+
+const INITIAL_STATE: Todo[] = [];
 
 function broofa():string {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -11,22 +13,12 @@ function broofa():string {
   });
 }
 
-const INITIAL_STATE: TodoState = {
-  todos: [
-    { 
-      id: broofa(),
-      desc: 'Excepteur fugiat elit veniam fugiat anim.',
-      completed: false,
-    },
-    { 
-      id: broofa(),
-      desc: 'Cillum irure exercitation duis nulla tempor magna.',
-      completed: true,
-    },
-  ],
-  completed: 1,
-  pending: 1,
-  todoCount: 2,
+function init():Todo[] {
+  const todos = localStorage.getItem('todos');
+  if (todos) {
+    return JSON.parse(todos);
+  }
+  return [];
 }
 
 interface props {
@@ -35,7 +27,7 @@ interface props {
 
 export const TodoProvider = ({ children }: props) => {
 
-  const [todoState, dispatch] = useReducer(todoReducer, INITIAL_STATE);
+  const [todos, dispatch] = useReducer(todoReducer, INITIAL_STATE, init);
 
   const addTodo = (desc: string) => {
     dispatch({ 
@@ -48,15 +40,24 @@ export const TodoProvider = ({ children }: props) => {
     });
   }
 
+  const removeTodo = (index: number) => {
+    dispatch({ type: 'removeTodo', payload: { index }});
+  }
+
   const toggleTodo = (id: string) => {
     dispatch({ type: 'toggleTodo', payload: { id }});
   }
 
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
+
   return (
-    <TodoContext.Provider 
+    <TodoContext.Provider
       value={{
-        todoState,
+        todos,
         addTodo,
+        removeTodo,
         toggleTodo,
       }}
     >

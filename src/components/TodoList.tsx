@@ -5,14 +5,12 @@ import { TodoItem } from "./TodoItem";
 
 export const TodoList = () => {
 
-  const { todoState } = useContext(TodoContext);
-
-  const { todos } = todoState;
+  const { todos } = useContext(TodoContext);
 
   return (
     <ul className="list-group list-group-flush">
-      {todos.map((todo) => (
-        <TodoItem key={todo.id} todo={todo} />
+      {todos.map((todo, index) => (
+        <TodoItem key={todo.id} todo={todo} index={index} />
       ))}
     </ul>
   );

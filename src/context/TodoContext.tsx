@@ -1,10 +1,11 @@
 import { createContext } from "react";
-import { TodoState } from "../interfaces/interfaces";
+import { Todo } from "../interfaces/interfaces";
 
 
 export type TodoContextProps = {
-  todoState: TodoState;
+  todos: Todo[];
   addTodo: (desc: string) => void;
+  removeTodo: (index: number) => void;
   toggleTodo: (id: string) => void;
 }
 
