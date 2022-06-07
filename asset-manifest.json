@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/daksen/react-ts-todo-app/static/css/main.5c4c8738.css",
-    "main.js": "/daksen/react-ts-todo-app/static/js/main.8111263f.js",
-    "index.html": "/daksen/react-ts-todo-app/index.html",
-    "main.5c4c8738.css.map": "/daksen/react-ts-todo-app/static/css/main.5c4c8738.css.map",
-    "main.8111263f.js.map": "/daksen/react-ts-todo-app/static/js/main.8111263f.js.map"
+    "main.css": "/react-ts-todo-app/static/css/main.5c4c8738.css",
+    "main.js": "/react-ts-todo-app/static/js/main.8111263f.js",
+    "index.html": "/react-ts-todo-app/index.html",
+    "main.5c4c8738.css.map": "/react-ts-todo-app/static/css/main.5c4c8738.css.map",
+    "main.8111263f.js.map": "/react-ts-todo-app/static/js/main.8111263f.js.map"
   },
   "entrypoints": [
     "static/css/main.5c4c8738.css",
