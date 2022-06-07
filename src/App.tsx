@@ -1,24 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { TodoProvider } from './context/TodoProvider';
+import { TodoHeader } from './components/TodoHeader';
+import { TodoList } from './components/TodoList';
+import './App.css'
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="main">
+      <div className="context">
+        <div className="container d-flex justify-content-center w-100">
+          <div className="colxs-12 col-sm-6">
+            <TodoProvider>
+              <TodoHeader />
+              <TodoList />
+            </TodoProvider>
+          </div>
+        </div>
+      </div>
+      <div className="area">
+        <ul className="circles">
+          { Array.from(Array(10).keys()).map((i) => <li key={i} />) }
+        </ul>
+      </div >
     </div>
   );
 }
